@@ -10,11 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+from os.path import join, dirname
 from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -23,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-z2ah0t847p^&16i1nu6ek%%(qh+7$w1zkf@m8#(+@xyo*9ri(d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','notifier-webapp.herokuapp.com']
 
@@ -75,11 +78,20 @@ WSGI_APPLICATION = 'frontend_notifier.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+DB_PASSWORD = os.environ.get("MONGO_DB_PASSWORD")
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'notifier',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': f'mongodb+srv://shivansh:{DB_PASSWORD}@cluster0.nf8mx.mongodb.net/notifier?retryWrites=true&w=majority',
+            'username': 'shivansh',
+            'password': f'{DB_PASSWORD}',
+            'authSource': 'notifier',
+            'authMechanism': 'SCRAM-SHA-1'
+        },
     }
 }
 

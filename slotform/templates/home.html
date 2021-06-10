@@ -8,5 +8,16 @@
 </head>
 <body>
     <h1>HOME PAGE</h1>
+    <form action="{% url 'home' %}" method="POST">
+        {% csrf_token %}
+        <input type='number' name= 'district_id' id="district_id" placeholder="DISTRICt ID">
+        <input type="email" name="email" id="email" placeholder="EMAIL"><br>
+        <input type="radio" id="true" name="telegram" value="True">
+        <label for="true">True</label><br>
+        <input type="radio" id="false" name="telegram" value="False">
+        <label for="false">False</label><br>
+        <input type="submit" value="submit">
+    
+    </form>
 </body>
 </html>
