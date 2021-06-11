@@ -1,35 +1,82 @@
-<!DOCTYPE html>
+{% load static %}
+<!doctype html>
 <html lang="en">
 
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <title>Login 07</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+   <link rel="stylesheet" href="{% static 'style.css' %}">
+
 </head>
 
 <body>
-   <section>
-      {% for message in messages %}
-      <div class="newalert">
-         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-         <strong>Message:</strong> {{ message }}
+   {% for message in messages %}
+   <div class="newalert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Message:</strong> {{ message }}
+   </div>
+   {% endfor %}
+   <section class="ftco-section">
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+               <h2 class="heading-section">Login Form</h2>
+            </div>
+         </div>
+         <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10">
+               <div class="wrap d-md-flex">
+                  <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
+                     <div class="text w-100">
+                        <h2>Welcome to login</h2>
+                        <p>Ain't a member yet?</p>
+                        <a href="/" class="btn btn-white btn-outline-white">Skip</a>
+                     </div>
+                  </div>
+                  <div class="login-wrap p-4 p-lg-5">
+                     <div class="d-flex">
+                        <div class="w-100">
+                           <h3 class="mb-4">Sign In</h3>
+                        </div>
+                        <!-- <div class="w-100">
+									<p class="social-media d-flex justify-content-end">
+										<a href="#"
+											class="social-icon d-flex align-items-center justify-content-center"><span
+												class="fa fa-facebook"></span></a>
+										<a href="#"
+											class="social-icon d-flex align-items-center justify-content-center"><span
+												class="fa fa-twitter"></span></a>
+									</p>
+								</div> -->
+                     </div>
+                     <form action="{% url 'login' %}" class="signin-form" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                           <label class="label" for="username">Username</label>
+                           <input type="text" name="username" class="form-control" placeholder="Username" required>
+                        </div>
+                        <div class="form-group mb-3">
+                           <label class="label" for="password">Password</label>
+                           <input type="password" name="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                           <button type="submit" class="form-control btn btn-primary submit px-3">Sign
+                              In</button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
       </div>
-      {% endfor %}
    </section>
-   <form action="{% url 'login' %}" method="POST">
-      {% csrf_token %}
-      <div>
-         <label for="id_username">Username</label>
-         <input type="text" placeholder="Username" name="loginusername" id="loginusername" required />
-      </div>
-      <div>
-         <label for="id_password1">Password</label>
-         <input type="password" placeholder="Password" name="loginpassword" id="loginpassword" required />
-      </div>
-      <button type="submit">Login</button>
-   </form>
-   <a href="/register"><button>Register</button></a>
+
 </body>
 
 </html>
