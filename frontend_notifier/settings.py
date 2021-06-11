@@ -78,8 +78,8 @@ WSGI_APPLICATION = 'frontend_notifier.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-DB_PASSWORD = os.environ.get("MONGO_DB_PASSWORD")
-
+# DB_PASSWORD = os.environ.get("MONGO_DB_PASSWORD")
+DB_PASSWORD = 'fNOR01C4fM45rxKD'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
