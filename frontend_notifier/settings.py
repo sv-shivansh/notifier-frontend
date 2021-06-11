@@ -90,7 +90,9 @@ DATABASES = {
             'username': 'shivansh',
             'password': f'{DB_PASSWORD}',
             'authSource': 'notifier',
-            'authMechanism': 'SCRAM-SHA-1'
+            'authMechanism': 'SCRAM-SHA-1',
+            'tls': True,
+            'tlsAllowInvalidCertificates': True
         },
     }
 }
