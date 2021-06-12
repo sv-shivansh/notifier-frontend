@@ -1,32 +1,23 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>Login 07</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="{% static 'style.css' %}">
-
+    <title>Document</title>
 </head>
-
 <body>
-    {% for message in messages %}
-    <div class="newalert">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>Message:</strong> {{ message }}
-    </div>
-    {% endfor %}
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">Email Registration Subscription Page</h2>
+                    <h2 class="heading-section">Visitors Subscription Page</h2>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -35,8 +26,6 @@
                         <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
                             <div class="text w-100">
                                 <h2>Welcome to Notifier</h2>
-                                <a href="/admin" class="btn btn-white btn-outline-white">Go Admin Section</a>
-                                <a href="/logout" class="btn btn-white btn-outline-white ml-20">Logout</a>
                             </div>
                         </div>
                         <div class="login-wrap p-4 p-lg-5">
@@ -45,8 +34,7 @@
                                     <h3 class="mb-4">Subscribe Now</h3>
                                 </div>
                             </div>
-                            <form action="{% url 'home' %}" method="POST" class="signin-form">
-                                {% csrf_token %}
+                            <form class="signin-form">
                                 <div class="form-group mb-3">
                                     <label class="label" for="state_id">State</label>
                                     <select name='state_id' id="state_id" placeholder="State"
@@ -61,25 +49,12 @@
                                     <select name='district_id' id="district_id" placeholder="State"
                                         class="form-control" required>
                                         {% for district in districts %}
-                                        <option>{{district.district_name}} ({{district.district_id}})</option>
+                                        <option value={{district.district_id}}>{{district.district_name}} ({{district.district_id}})</option>
                                         {% endfor %}
                                     </select>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label class="label" for="email">Email</label>
-                                    <input input type="email" name="email" id="email" placeholder="Email"
-                                        class="form-control" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="telegram" class="label">Telegram</label>
-                                    <input type="radio" id="true" name="telegram" value="True">
-                                    <label for="true">Yes</label>
-                                    <input type="radio" id="false" name="telegram" value="False">
-                                    <label for="false">No</label>
-                                </div>
                                 <div class="form-group">
-                                    <button type="submit" class="form-control btn btn-primary submit px-3">Subscribe Now
-                                        </button>
+                                    <button type="submit" class="form-control btn btn-primary submit px-3" onclick="displayDetails()">Subscribe Now</button>    
                                 </div>
                             </form>
                         </div>
@@ -89,4 +64,11 @@
         </div>
     </section>
 </body>
+<script>
+    function displayDetails() {
+        var data = document.getElementById("district_id")
+        var district_id = data.options[data.selectedIndex].value
+        alert(`You selected ${district_id}`)
+    }
+</script>
 </html>
