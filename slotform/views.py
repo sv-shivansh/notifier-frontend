@@ -44,7 +44,6 @@ def login(request):
 def admin(request):
     if str(request.user) == 'shivansh':
         users = user.objects.all()
-        # states = state.objects.all()
         districts = district.objects.all().order_by('district_name')
         if request.method == 'POST':
             userdistrict = request.POST["district_id"]

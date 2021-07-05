@@ -44,12 +44,19 @@
     {% for user in users %}
     {{user.email}}
     {% endfor %} -->
-    <section class="page-contain">
+    <!-- <section class="page-contain">
         {% for district in districts %}
         <a href="/edit/{{district.district_id}}" class="data-card">
           <h3>{{district.district_name}}</h3>
         </a>
         {% endfor %}
-      </section>
+      </section> -->
+        {% csrf_token %}
+        <select name="district_id" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+            {% for district in districts %}
+                <option value="/edit/{{district.district_id}}">{{district.district_name}} ({{district.district_id}})</option>
+            {% endfor %}
+        </select><br>
+
 </body>
 </html>
