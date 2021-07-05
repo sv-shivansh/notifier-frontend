@@ -44,8 +44,8 @@ def login(request):
 def admin(request):
     if str(request.user) == 'shivansh':
         users = user.objects.all()
-        states = state.objects.all()
-        districts = district.objects.all()
+        # states = state.objects.all()
+        districts = district.objects.all().order_by('district_name')
         if request.method == 'POST':
             userdistrict = request.POST["district_id"]
             is_active = request.POST["is_active"]
@@ -60,7 +60,12 @@ def admin(request):
             updateDistrict.telegram_channel_name = telegram_channel_name
             updateDistrict.save()
             return render(request ,'success.html', {'updateDistrict': updateDistrict})
-        return render(request, 'admin.html', {'users': users, 'states':states, 'districts': districts})
+        return render(request, 'admin.html', {'users': users, 'districts': districts})
+
+@login_required
+def edit(request, district_id):
+    dist = district.objects.filter(district_id = district_id)
+    return render(request, 'edit.html', {'district': dist})
 
 
 

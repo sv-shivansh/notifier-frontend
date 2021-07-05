@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'card.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    {% for dist in district %}
+        <h2>{{dist.district_name}}</h2>
+        <form action="{% url 'admin' %}" method="POST">
+            {% csrf_token %}
+            <input name="district_id" value={{dist.district_id}} hidden>
+                <!-- {% for district in districts %}
+                    <option>{{district.district_name}} ({{district.district_id}})</option>
+                {% endfor %} -->
+            </input><br>
+            <label for="is_telegram" class="label">Is Telegram</label>
+            <input type="radio" id="true" name="is_telegram" value="True">
+            <label for="true">Yes</label>
+            <input type="radio" id="false" name="is_telegram" value="False">
+            <label for="false">No</label><br>
+            <label for="is_active" class="label">Is Active</label>
+            <input type="radio" id="true" name="is_active" value="True">
+            <label for="true">Yes</label>
+            <input type="radio" id="false" name="is_active" value="False">
+            <label for="false">No</label><br>
+            <label for="telegram_channel_name">Channel Name</label>
+            <input type="text" name="telegram_channel_name" id="telegram_channel_name" placeholder="{{dist.telegram_channel_name}}" value={{dist.telegram_channel_name}}>
+            <label for="telegram_channel_id">Telegram id</label>
+            <input type="text" name="telegram_channel_id" id="telegram_channel_id" value= {{dist.telegram_channel_id}}><br>
+            <input type="submit" value="Submit">
+        </form>
+    
+    {% endfor %}
+</body>
+</html>
